@@ -1,0 +1,8 @@
+FROM ubuntu:14.04
+
+RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get install -y python-pip python-dev
+
+RUN pip install numpy
+
+RUN mkdir -p /opt/t4j/chainerapp && mkdir -p /var/opt/t4j/chainer
