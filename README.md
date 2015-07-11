@@ -9,13 +9,13 @@ chainerapp
 
 ####Fork & Clone
 - https://github.com/(GIT_ID)/chainer.git
-- https://github.com/(GIT_ID)//chainerapp.git
+- https://github.com/(GIT_ID)/chainerapp.git
 
 
 ####First Setting
 ex.
 vi ~/.bash_profile
-exportGIT_HOME=/Users/(OS_ID)/git
+exportGIT_HOME=/Users/(UID)/git
 
 ####Build DockerImage
   $ ./1_build_chainerapp-test.sh
