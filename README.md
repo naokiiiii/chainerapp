@@ -11,23 +11,20 @@ chainerapp
 - https://github.com/(GIT_ID)/chainer.git
 - https://github.com/(GIT_ID)//chainerapp.git
 
-ex. GIT_HOME=/Users/(OS_ID)/git
+
+####First Setting
+ex.
+vi ~/.bash_profile
+exportGIT_HOME=/Users/(OS_ID)/git
 
 ####Build DockerImage
-  $ docker build -t t4j/chainerapp-test:0.1 /Users/(OS_ID)/git/chainerapp/.
+  $ ./1_build_chainerapp-test.sh
 
 ####Start Container
-  docker run --name chainerapp-test-up -i -t -d -p 8080:8080 /
-    -v /Users/(OS_ID)/git/serverapp:/opt/t4j/serverapp /
-    -v /Users/(OS_ID)/git/chainer:/opt/t4j/chainer /
-    t4j/chainerapp-test:0.1
+  $ ./2_run_chainerapp-test.sh
 
-####Test
-  $ docker exec -it chainerapp-test-up XXXX
+####Stop & Delete Container
+  $ ./3_stop_chainerapp-test.sh
 
 ####Login Container
-  $ docker exec -it chainerapp-test-up bash
-
-####top & delete Container
-  $ docker stop chainerapp-test-up
-  $ docker rm chainerapp-test-up
+  $ ./4_exec_chainerapp-test.sh
