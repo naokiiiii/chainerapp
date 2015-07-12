@@ -1,3 +1,3 @@
 FROM t4j/chainer:latest
 
-RUN mkdir -p /opt/t4j/chainerapp
+RUN mkdir -p /opt/t4j/chainerapp && mkdir -p /var/opt/t4j/chainer
