@@ -1,3 +1,7 @@
 FROM t4j/chainer:latest
 
-RUN mkdir -p /opt/t4j/chainerapp && mkdir -p /var/opt/t4j/chainer
+RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get -y install python-opencv
+RUN apt-get -y install libjpeg-dev libfreetype6-dev zlib1g-dev
+
+RUN mkdir -p /opt/t4j/chainerapp && mkdir -p /var/opt/t4j/chainer-data/mstimeges && mkdir -p /var/opt/t4j/chainer-data/imeges && mkdir -p /var/opt/t4j/chainer-data/model && mkdir -p /var/opt/t4j/chainer-data/tmpimages
