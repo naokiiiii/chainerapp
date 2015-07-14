@@ -3,15 +3,17 @@ import cv2
 import argparse
 import os
 import numpy
- 
+
 parser = argparse.ArgumentParser()
 parser.add_argument("source_dir")
 parser.add_argument("target_dir")
 args = parser.parse_args()
- 
+
 target_shape = (256, 256)
- 
+
 for source_imgpath in os.listdir(args.source_dir):
+    if source_imgpath == '.DS_Store': #escape invisible file of Mac
+        continue
     print source_imgpath
     src = cv2.imread(args.source_dir+"/"+source_imgpath)
     # mirror image

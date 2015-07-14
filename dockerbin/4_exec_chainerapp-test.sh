@@ -2,4 +2,4 @@
 #
 # docker exec chainerapp-test
 #
-docker exec -it chainerapp-test-up bash
+docker exec -it chainerapp-test-up /bin/bash
