@@ -9,43 +9,43 @@ def cmd(cmd):
 	return stdout.rstrip()
 
 #labels
-dirs = cmd("ls "+sys.argv[1])
+data_dir = sys.argv[1]
+dirs = cmd("ls %s/mstimages" % data_dir)
 labels = dirs.splitlines()
 
 #make directries
-cmd("mkdir images")
+cmd("mkdir %s/images" % data_dir)
 
 #copy images and make train.txt
-pwd = cmd('pwd')
-imageDir = pwd+"/images"
-train = open('train.txt','w')
-test = open('test.txt','w')
-labelsTxt = open('labels.txt','w')
+imageDir = "%s/images" % data_dir
+train = open("%s/train.txt" % data_dir,'w')
+test = open("%s/test.txt" % data_dir,'w')
+labelsTxt = open("%s/labels.txt" % data_dir,'w')
 
 classNo=0
 cnt = 0
 #label = labels[classNo]
 for label in labels:
-	workdir = pwd+"/"+sys.argv[1]+"/"+label
-	imageFiles = cmd("ls "+workdir+"/*.jpg")
+	workdir = "%s/mstimages/%s" % (data_dir, label)
+	imageFiles = cmd("ls %s/*.jpg" % workdir)
 	images = imageFiles.splitlines()
-	
+
 	labelsTxt.write(label+"\n")
 	startCnt=cnt
 	length = len(images)
 
 	for image in images:
-		imagepath = imageDir+"/image%07d" %cnt +".jpg"
+		imagepath = "%s/image%07d.jpg" % (imageDir, cnt)
 		#cmd("cp "+workdir+"/"+image+" "+imagepath)
-		cmd("cp "+image+" "+imagepath)
+		cmd("cp %s %s" % (image, imagepath))
 		#print "cp "+image+" "+imagepath
 		if cnt-startCnt < length*0.75:
-			train.write(imagepath+" %d\n" % classNo)
+			train.write("%s %d\n" % (imagepath, classNo))
 		else:
-			test.write(imagepath+" %d\n" % classNo)
-		print imagepath 
+			test.write("%s %d\n" % (imagepath, classNo))
+		print imagepath
 		cnt += 1
-	
+
 	classNo += 1
 
 train.close()

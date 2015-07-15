@@ -1,0 +1,9 @@
+FROM t4j/chainer:latest
+
+RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get -y install python-opencv
+RUN apt-get -y build-dep python-imaging
+RUN apt-get -y install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
+RUN pip install Pillow
+
+RUN mkdir -p /opt/t4j/chainerapp && mkdir -p /var/opt/t4j/chainer-data

@@ -104,11 +104,11 @@ def feed_data():
     data_q.put('train')
 
     for epoch in six.moves.range(1, 1 + args.epoch):
-	epoch_count=epoch
+        epoch_count=epoch
         print('epoch', epoch, file=sys.stderr)
         print('learning rate', optimizer.lr, file=sys.stderr)
         perm = np.random.permutation(len(train_list))
-        
+
         for idx in perm:
             path, label = train_list[idx]
             batch_pool[i] = pool.apply_async(read_image, (path, False, True))
@@ -255,8 +255,7 @@ def train_loop():
 
         else:
             loss, accuracy = model.forward(x, y, train=False)
-
-        pickle.dump(model, open('model%04d'%epoch_count, 'wb'), -1)
+        pickle.dump(model, open('%s/model%04d'%(args.model,epoch_count), 'wb'), -1)
         res_q.put((float(cuda.to_cpu(loss.data)),
                    float(cuda.to_cpu(accuracy.data))))
         del loss, accuracy, x, y
@@ -275,4 +274,4 @@ feeder.join()
 logger.join()
 
 # Save final model
-pickle.dump(model, open('model', 'wb'), -1)
+pickle.dump(model, open('%s/model'%args.out, 'wb'), -1)
