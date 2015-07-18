@@ -255,7 +255,7 @@ def train_loop():
 
         else:
             loss, accuracy = model.forward(x, y, train=False)
-        pickle.dump(model, open('%s/model%04d'%(args.model,epoch_count), 'wb'), -1)
+        pickle.dump(model, open('%s/model%04d'%(args.out,epoch_count), 'wb'), -1)
         res_q.put((float(cuda.to_cpu(loss.data)),
                    float(cuda.to_cpu(accuracy.data))))
         del loss, accuracy, x, y
