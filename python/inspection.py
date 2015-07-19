@@ -26,6 +26,7 @@ import nin
 parser = argparse.ArgumentParser(description='Image inspection using chainer')
 parser.add_argument('image', help='Path to inspection image file')
 parser.add_argument('--model','-m',default='model', help='Path to model file')
+parser.add_argument('--labels','-l',default='labels.txt', help='Path to labels.txt file')
 parser.add_argument('--mean', default='mean.npy', help='Path to the mean file (computed by compute_mean.py)')
 args = parser.parse_args()
 
@@ -63,7 +64,7 @@ x=cuda.to_cpu(x)
 score = model.predict(x)
 score=cuda.to_cpu(score.data)
 
-categories = np.loadtxt("labels.txt", str, delimiter="\t")
+categories = np.loadtxt(open(args.labels, 'rb'), str, delimiter="\t")
 print(type(score.data))
 top_k = 20
 prediction = zip(score[0].tolist(), categories)

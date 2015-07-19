@@ -7,4 +7,4 @@ CURRENT=$(cd $(dirname $0) && pwd)
 
 cd $PYTHON_DIR
 python ./crop.py $DATA_DIR/tmpimages $DATA_DIR/tmpimages
-python ./inspection.py --model=$DATA_DIR/model/model --mean=$DATA_DIR/mean.npy $1
+python ./inspection.py --model=$DATA_DIR/model/model --label=$DATA_DIR/labels.txt --mean=$DATA_DIR/mean.npy $1
