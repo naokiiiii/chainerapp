@@ -35,6 +35,8 @@ class Inspection():
 	model = None
 	mean_image = None
 
+	DATA_PATH = '/var/opt/t4j/chainer-data/'
+
 	def read_image(self, path, center=False, flip=False):
 		image = np.asarray(Image.open(path)).transpose(2, 0, 1)
 		if center:
@@ -52,7 +54,7 @@ class Inspection():
 		else:
 			return image
 
-	def execute(self, imgfile, modelfile='model', meanfile='mean.npy'):
+	def execute(self, imgfile, modelfile=DATA_PATH+'model', labelsfile=DATA_PATH+'labels.txt',meanfile=DATA_PATH+'mean.npy'):
 		self.mean_image = pickle.load(open(meanfile, 'rb'))
 
 		self.model = pickle.load(open(modelfile, 'rb'))
@@ -68,7 +70,7 @@ class Inspection():
 		score = self.model.predict(x)
 		score=cuda.to_cpu(score.data)
 
-		categories = np.loadtxt("labels.txt", str, delimiter="\t")
+		categories = np.loadtxt(open(labelsfile, 'rb'), str, delimiter="\t")
 		top_k = 20
 		prediction = zip(categories, score[0].tolist())
 		prediction.sort(cmp=lambda x, y: cmp(x[1], y[1]), reverse=True)
