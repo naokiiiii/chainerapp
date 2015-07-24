@@ -8,6 +8,7 @@ zero-origin label (this format is same as that used by Caffe's ImageDataLayer).
 
 """
 from __future__ import print_function
+import os
 import datetime
 import json
 import multiprocessing
@@ -15,6 +16,7 @@ import random
 import sys
 import threading
 import time
+import cv2
 
 import numpy as np
 from PIL import Image
@@ -38,6 +40,10 @@ class Inspection():
 	DATA_PATH = '/var/opt/t4j/chainer-data/'
 
 	def read_image(self, path, center=False, flip=False):
+		src_image = cv2.imread(path)
+		dst_image = cv2.resize(src_image,(256,256))
+		cv2.imwrite(path, dst_image)
+
 		image = np.asarray(Image.open(path)).transpose(2, 0, 1)
 		if center:
 			top = left = cropwidth / 2
