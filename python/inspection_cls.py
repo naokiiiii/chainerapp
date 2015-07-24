@@ -54,7 +54,7 @@ class Inspection():
 		else:
 			return image
 
-	def execute(self, imgfile, modelfile=DATA_PATH+'model', labelsfile=DATA_PATH+'labels.txt',meanfile=DATA_PATH+'mean.npy'):
+	def execute(self, imgfile, modelfile=DATA_PATH+'model/model', labelsfile=DATA_PATH+'labels.txt',meanfile=DATA_PATH+'mean.npy'):
 		self.mean_image = pickle.load(open(meanfile, 'rb'))
 
 		self.model = pickle.load(open(modelfile, 'rb'))
